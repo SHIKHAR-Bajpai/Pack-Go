@@ -1,0 +1,19 @@
+.view-bookings .table {
+    border: 1px solid #dee2e6; 
+    border-collapse: collapse;
+  }
+  
+  .view-bookings .table th,
+  .view-bookings .table td {
+    border: 1px solid #dee2e6; 
+    padding: 10px; 
+  }
+  
+  .view-bookings .table th {
+    text-align: center; 
+    background-color: #f8f9fa;
+  }
+  
+  .view-bookings td{
+    text-align: center;
+  }

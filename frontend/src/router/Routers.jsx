@@ -32,7 +32,7 @@ const Routers = () => {
             {/* Protected routes for admin */}
             <Route path="/admin" element={<ProtectedRoute element={Admin} />} />
             <Route path="/admin/viewbookings" element={<ProtectedRoute element={ViewBookings} />} /> 
-            <Route path="/admin/mangeTours" element={<ProtectedRoute element={ManageTours} />} />
+            <Route path="/admin/manageTours" element={<ProtectedRoute element={ManageTours} />} />
             <Route path="/admin/viewusers" element={<ProtectedRoute element={ViewUsers} />} /> 
         </Routes>
     );

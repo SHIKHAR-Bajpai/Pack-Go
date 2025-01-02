@@ -29,9 +29,9 @@ const bookingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        bookAt: {
-            type: Date,
-            default: new Date(),
+        bookingDate: {
+            type: String,
+            required: true,
         },
     },
     { timestamps: true }

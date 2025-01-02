@@ -2,7 +2,7 @@ import Booking from "../models/Booking.js"
 
 export const createBooking = async (req, res) => {
 
-    const { userEmail, tourName, fullName, guestSize, amount, phone } = req.body; 
+    const { userEmail, tourName, fullName, guestSize, amount, phone , bookingDate } = req.body; 
 
     const newBooking = new Booking({
         userId: req.body.userId, 
@@ -12,7 +12,7 @@ export const createBooking = async (req, res) => {
         guestSize,
         phone,
         amount,
-        bookAt: new Date(), 
+        bookingDate, 
     });
 
     try {

@@ -42,8 +42,14 @@ const tourSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    orderId: { 
+      type: Number, 
+      required: true,
+      default: 0
+    },
   },
   { timestamps: true }
 );
 
 export default mongoose.model("Tour", tourSchema);
+

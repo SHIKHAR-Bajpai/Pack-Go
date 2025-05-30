@@ -69,7 +69,7 @@ const Header = () => {
                                 {user ? (
                                     <>
                                         <h5 className='mb-0'>{user.Name.replace(/\b\w/g, (char) => char.toUpperCase())}</h5>
-                                        {user.role === "admin" && ( // Show Admin Options only if the user is an admin
+                                        {user.role === "admin" && ( 
                                             <Button className='btn secondary__btn'>
                                                 <Link to="/admin" style={{ color: 'inherit', textDecoration: 'none' }}>Admin Options</Link>
                                             </Button>
@@ -81,7 +81,7 @@ const Header = () => {
                                 ) : (
                                     <>
                                         <Button className='btn secondary__btn'>
-                                            <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>Login</Link>
+                                            <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>login</Link>
                                         </Button>
                                         <Button className='btn primary__btn'>
                                             <Link to="/register" style={{ color: 'inherit', textDecoration: 'none' }}>Register</Link>

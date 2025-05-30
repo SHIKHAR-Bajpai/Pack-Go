@@ -1,0 +1,25 @@
+.slider {
+    width: 30%;
+    height: 15px;
+    margin: 20px 0;
+    border-radius: 50%;
+  }
+  
+  .track {
+    background: #ddd;
+    height: 10px;
+  }
+  
+  .thumb {
+    height: 20px;
+    width: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: x-small;
+  }

@@ -76,7 +76,7 @@ const ViewBookings = () => {
                                             <td>{booking.guestSize}</td>
                                             <td>{booking.amount}</td>
                                             <td>{booking.phone}</td>
-                                            <td>{new Date(booking.bookAt).toLocaleString()}</td>
+                                            <td>{booking.bookingDate}</td>
                                         </tr>
                                     ))
                                 ) : (

@@ -1,17 +1,26 @@
 import Tour from "../models/Tour.js";
 
+
 export const getAllTour = async (req, res) => {
     const page = parseInt(req.query.page) || 0; 
-    const limit = 8; 
+
     try {
-        const tours = await Tour.find({}).populate('reviews').skip(page * limit).limit(limit);
-        // console.log(tours);
-        res.status(200).json({success: true, count: tours.length, message: "Successful", data: tours, });
+        const tours = await Tour.find({}).populate('reviews').sort({ orderId: 1 })
+        res.status(200).json({
+            success: true,
+            count: tours.length,
+            message: "Successful",
+            data: tours,
+        });
     } catch (err) {
-        // console.error(err); 
-        res.status(500).json({ success: false, message: "Internal server error", error: err.message });
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+            error: err.message,
+        });
     }
-}
+};
+
 
 export const getSingleTour = async (req, res) => {
     const id = req.params.id;
@@ -142,3 +151,83 @@ export const getTourCount = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
+
+export const getMaxPrice = async (req, res) => {
+    try {
+        const maxPrice = await Tour.aggregate([
+            { $group: { _id: null, maxPrice: { $max: "$price" } } }
+        ]);
+
+        if (maxPrice.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No tours found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Maximum price retrieved successfully",
+            data: maxPrice[0].maxPrice
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+            error: err.message
+        });
+    }
+};
+export const getMinPrice = async (req, res) => {
+    try {
+        const minPrice = await Tour.aggregate([
+            { $group: { _id: null, minPrice: { $min: "$price" } } }
+        ]);
+
+        if (minPrice.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No tours found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Minimum price retrieved successfully",
+            data: minPrice[0].minPrice
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+            error: err.message
+        });
+    }
+};
+
+
+export const updateTourOrder = async ( req , res) => {
+    //   console.log("RequestBody:", req.body);
+      try{
+        const updatedTours = req.body;
+        const response = updatedTours.map(tour => ({
+            updateOne: {
+                filter: { _id: tour._id },
+                update: {$set: { orderId: tour.order}},
+            },
+        }));
+
+        const updateResults = await Tour.bulkWrite(response);
+        // console.log("Update results: ", updateResults)
+
+        if(updateResults.modifiedCount > 0){
+            return res.status(200).json({success: true, message: 'Updated successfully'});
+        }else{
+            return res.status(400).json({success: false, message: 'Failed to update order'});
+        }
+
+      }catch(error){
+        console.error("Error updating tour order:", error);
+        return res.status(500).json({success: false, message: 'Server error', error: error.message})
+      }
+};

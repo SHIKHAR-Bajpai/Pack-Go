@@ -6,6 +6,7 @@ import FeaturedTourList from '../components/Featured-tours/FeaturedTourList'
 import MasonryImagesGallery from '../components/Image-gallery/ImagesGallery'
 import Testimonials from '../components/Testimonial/Testimonials'
 
+
 const SectionTitle = ({ title, subtitle }) => (
   <>
     <h2 className='subtitle'>{title}</h2>
